@@ -40,7 +40,7 @@ const Weather = React.createClass({
       } else if(city && temp) {
         return <WeatherMessage city={city} temp={temp} />;
       }
-
+      return '';
     }
 
     return (
