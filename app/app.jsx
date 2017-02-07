@@ -10,7 +10,7 @@ import Examples from 'Examples';
 require('style!css!foundation-sites/dist/css/foundation.min.css');
 
 // App CSS
-require('style!css!AppCSS');
+require('style!css!sass!AppStyles');
 
 $(document).foundation();
 
