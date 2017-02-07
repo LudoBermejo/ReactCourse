@@ -5,16 +5,33 @@ import openWeatherMap from 'openWeatherMap';
 import ErrorModal from 'ErrorModal';
 
 const Weather = React.createClass({
+  propTypes: {
+    location: React.PropTypes.object
+  },
   getInitialState() {
     return {
       isLoading: false
     };
   },
+  componentDidMount() {
+    const location = this.props.location.query.location;
+    if (location) {
+      this.searchCity(location);
+    }
+  },
+  componentWillReceiveProps(newProps) {
+    const location = newProps.location.query.location;
+    if (location) {
+      this.searchCity(location);
+    }
+  },
   searchCity(city) {
     this.setState(
       {
         isLoading: true,
-        errorMessage: undefined
+        errorMessage: undefined,
+        location: undefined,
+        temp: undefined
       }
     );
     const self = this;

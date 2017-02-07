@@ -1,10 +1,14 @@
 import React from 'react';
-import { IndexLink } from 'react-router';
+import { IndexLink, browserHistory } from 'react-router';
 
 const Nav = React.createClass({
   onSearch(e) {
     e.preventDefault();
-    alert('Not yet wired up!');
+    const search = encodeURIComponent(this.refs.searchInput.value);
+    if(search) {
+      this.refs.searchInput.value = '';
+      window.location = `/#?location=${search}`;
+    }
   },
   render() {
     return (
@@ -38,7 +42,7 @@ const Nav = React.createClass({
         <div className="top-bar-right">
           <form onSubmit={this.onSearch}>
             <ul className="menu">
-              <li><input type="search" placeholder="Search weather" /></li>
+              <li><input type="search" ref="searchInput" placeholder="Search weather" /></li>
               <li><input type="submit" className="button" value="Get Weather" /></li>
             </ul>
           </form>
