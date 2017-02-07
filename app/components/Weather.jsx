@@ -2,6 +2,7 @@ import React from 'react';
 import WeatherForm from 'WeatherForm';
 import WeatherMessage from 'WeatherMessage';
 import openWeatherMap from 'openWeatherMap';
+import ErrorModal from 'ErrorModal';
 
 const Weather = React.createClass({
   getInitialState() {
@@ -10,7 +11,12 @@ const Weather = React.createClass({
     };
   },
   searchCity(city) {
-    this.setState({ isLoading: true });
+    this.setState(
+      {
+        isLoading: true,
+        errorMessage: undefined
+      }
+    );
     const self = this;
     openWeatherMap
       .getTemp(city)
@@ -24,17 +30,27 @@ const Weather = React.createClass({
         );
       })
       .catch((message) => {
-        alert(message);
+        self.setState({
+          errorMessage: message.message
+        });
       });
   },
   render() {
     const {
       isLoading,
       city,
-      temp
+      temp,
+      errorMessage
     } = this.state;
 
-    function renderMesage() {
+    function renderError() {
+      if (errorMessage) {
+        return <ErrorModal message={errorMessage} />;
+      }
+      return '';
+    }
+
+    function renderMessage() {
       if (isLoading) {
         return <h3 className="text-center">Loading city temperature</h3>;
       } else if (city && temp) {
@@ -47,7 +63,8 @@ const Weather = React.createClass({
       <div>
         <h1 className="text-center">Weather component</h1>
         <WeatherForm onSearchCity={this.searchCity} />
-        {renderMesage()}
+        {renderMessage()}
+        {renderError()}
       </div>
     );
   }

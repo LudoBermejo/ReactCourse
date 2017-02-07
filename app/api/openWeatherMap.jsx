@@ -18,10 +18,10 @@ module.exports = {
         if (res.data.cod && res.data.main) {
           return res.data.main.temp;
         }
-        throw new Error(res.data.message);
+        throw new Error(res);
       })
       .catch((res) => {
-        throw new Error(res.data.message);
+        throw new Error(res);
       });
   }
 };
