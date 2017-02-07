@@ -2,7 +2,7 @@ import React from 'react';
 
 const WeatherMessage = (props) => (
   <div>
-    <p>Temp in {this.props.city} is {this.props.temp} degrees</p>
+    <p>Temp in {props.city} is {props.temp} degrees</p>
   </div>
 );
 
