@@ -1,7 +1,10 @@
 import React from 'react';
 
 const About = () => (
-  <h3>About component</h3>
+  <div>
+    <h1 className="text-center">About component</h1>
+    <p>This is the most simple demo I could find to use with about</p>
+  </div>
 );
 
 module.exports = About;
